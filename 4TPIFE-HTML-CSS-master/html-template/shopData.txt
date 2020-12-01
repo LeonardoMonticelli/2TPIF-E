@@ -1,0 +1,4 @@
+cat.jpeg|Cat|20|this is a cat
+dog.jpeg|Dog|50|this is a dog
+hotdog.jpeg|Hot-Dog|4|this is a hot-dog
+hotcat.jpeg|Hot-Cat|5|and this a hot-cat

@@ -76,7 +76,7 @@
     <div id="bigsqua">
         <div class="prod">
             <?php  
-                $fileHandler = fopen("shopData.txt","r");
+                $fileHandler = fopen("data\\shopData.txt","r");
                 while($line=fgets($fileHandler)){
                     $product = explode("|", $line);
                     ?>

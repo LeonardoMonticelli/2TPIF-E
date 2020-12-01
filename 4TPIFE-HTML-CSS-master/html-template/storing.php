@@ -1,13 +1,5 @@
 <?php
     session_start();
-    $getAd = new SplFileObject("admins.txt");
-    $arrAd=[];
-    while(!$getAd ->eof()){
-        array_push($arrAd, $getAd);
-        //$admin = $getAd->fgets();
-        // $admin=fgets($getAd);
-    }
-    $getAd = null;
     if(isset($_GET['userName'])) {
         $_SESSION['user'] = $_GET['userName'];
         $_SESSION['currentUser'] = $_SESSION['user'];

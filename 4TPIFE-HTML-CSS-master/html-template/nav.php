@@ -15,3 +15,13 @@
         }
     }
 ?>
+<div class="navigation">
+    <?php
+        $navigationLinks=["home.php"=>"Home","shop.php"=>"Products","login.php"=>"Login"];
+        foreach ($navigationLinks as $key => $value) {
+            if(($key<>"login.php") || ($_SESSION["isUserLoggedIn"]<>true)){
+                addNavLink($key,$value)
+            }
+        }
+    ?>
+</div>

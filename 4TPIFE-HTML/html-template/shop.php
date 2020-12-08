@@ -73,6 +73,7 @@
             <?php
         }
     ?>
+    
     <div id="bigsqua">
         <div class="prod">
             <?php  
@@ -90,13 +91,6 @@
                     }
                     fclose($fileHandler);
             ?>
-        </div>
-        <div>
-            <!-- <input type="text" name="field1" placeholder="image name">
-            <input type="text" name="field2" placeholder="name">
-            <input type="text" name="field3" placeholder="price in EUR">
-            <input type="text" name="field4" placeholder="description">
-                        <input type="submit" value="SAVE"> -->
         </div>
         <form>
             <div class="form-group">

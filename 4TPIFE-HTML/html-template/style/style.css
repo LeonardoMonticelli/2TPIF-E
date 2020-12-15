@@ -2,26 +2,32 @@ body {
     background-color: #d5f9de;
 }
 
-
 /*Top part of the website*/
 
 #bigsqua {
     background-color: #a3b6d4;
-    text-align: center;
 }
 
 .prod {
     display: flex;
-    flex-wrap: center;
-    justify-content: center;
-    text-align: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
     background-color: #949ac0;
-    margin: 3px;
+}
+
+.box{
+    display:inline-block;
+    text-align: center;
+    width: 33%;
+    height: 100%;
+    margin: 0.1%;
 }
 
 .bellow {
     display: flex;
     flex-direction: column;
+    background-color:#98a0d6;
 }
 
 .tag {
@@ -35,7 +41,6 @@ body {
 }
 
 .product_image {
-    align-self: center;
-    width: auto;
+    width: 150px;
     height: 150px;
 }

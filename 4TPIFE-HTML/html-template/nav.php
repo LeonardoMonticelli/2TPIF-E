@@ -6,7 +6,7 @@
             if(!isset($_SESSION["isUserLoggedIn"])){
                 $_SESSION["isUserLoggedIn"] = false;
             }
-            $navigationLinks=["home.php"=>"Home","shop.php"=>"Products"];
+            $navigationLinks=["home.php"=>"Home","shop.php"=>"Products","contact.php"=>"Contact"];
             foreach ($navigationLinks as $key => $value) {
                     addNavLink($key,$value);
             }

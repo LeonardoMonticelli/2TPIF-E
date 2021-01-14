@@ -1,6 +1,6 @@
 images\cat.jpeg|Cat|20|this is a cat
 images\dog.jpeg|Dog|50|this is a dog
-images\hotdog2.jpeg|Hot-Dog|your fingers|this is a hot-dog
-images\hotcat.jpeg|Hot-Cat|your soul|this is Okayu
+images\hotdog.jpeg|Hot-Dog|your fingers|this is a hot-dog
+images\hotcat.jpeg|Hot-Cat|your soul|this is hot-cat?
 images\catdog.jpeg|Cat-Dog|what|yeah
 images\nina.jpeg|Nina|no|no

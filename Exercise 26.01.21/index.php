@@ -18,16 +18,21 @@
                 array_push($newIndices,$indices[$a]);
             }
         }
-
         ?>
         <select><?php
         for($b=0;$b<sizeof($newIndices);$b++){
             ?>
-            <option value="<?=$indices[$b]?>">
+            <option value="<?=$newIndices[$b]?>"><?=$items[$newIndices[$b]]?>
             <?php
-        }?>
-        </select>
+        }
+        ?>        
+        </select><?php
+        for($c=0;$c<sizeof($newIndices);$c++){?>
+            <ul>
+                <li><?=$items[$newIndices[$c]]?></li>
+            </ul>
             <?php
-    ?>
+        }
+        ?>
 </body>
 </html>

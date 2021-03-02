@@ -1,13 +1,12 @@
 create or replace database wsers2;
 use wsers2;
 
-create table ppl(
+CREATE TABLE PPL(
     ID_PERSON int NOT NULL AUTO_INCREMENT,
-    first_name varchar(50),
-    family_name varchar(50),
-    age int(2),
-    PRIMARY KEY (ID_PERSON),
+    FirstName varchar(50),
+    LastName varchar(50),
+    Age int,
+    primary key (ID_PERSON)
 )
 
-INSERT INTO ppl(first_name,family_name,age)
-VALUES (pepe, perez, 32)
+INSERT INTO PPL (LastName, FirstName,Age) VALUES("Perez","Pepe",32);

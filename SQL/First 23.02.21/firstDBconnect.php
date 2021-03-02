@@ -11,10 +11,10 @@
     }
     echo "Connected Succesfully";
 
-    $mySelect ="Select Family_Name from PPL";
+    $mySelect ="Select LastName from PPL";
     $myResult = mysqli_query($connection, $mySelect);
 
     while($row = mysqli_fetch_assoc($myResult)){
-        echo $row["Family_name"]." ".$row["First_name"]." is ".$row["age"]." years old"."</br>";
+        echo $row["LastName"]." ".$row["FirstName"]." is ".$row["Age"]." years old"."</br>";
     }
 ?>

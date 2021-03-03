@@ -12,10 +12,6 @@
     <script src=''></script>
 </head>
 <body>
-    <?php
-    {$number=[];
-    array_sum()}
-    ?>
     <form>
         <input type="text">
         <input type="submit" value="SUM">

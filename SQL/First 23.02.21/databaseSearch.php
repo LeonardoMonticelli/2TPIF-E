@@ -11,10 +11,22 @@
 <body>   
     <?php
         if(isset($_GET["wanted"])){
-            print"Doing a search for the person named ".".";
+            print"Doing a search for the person named ".$_GET["wanted"]."... please wait<br>";
             include_once("DBconnect.php");
-            $myselect = "SELECT * from ppl where LastName='".$_GET["wanted"]."'";
-            $myresult= mysqli_query($connection, $myselect);
+            // $myselect = "SELECT * from ppl where LastName='".$_GET["wanted"]."'";
+            // $myresult= mysqli_query($connection, $myselect);
+            $stmt=$connection->prepare("SELECT * from ppl where LastName=?");
+            if(!$stmt){
+                die("There is an errr in your sql statement...");
+            }
+
+            $stmt->bind_param("s", $_GET["wanted"]);
+            $stmt->execute();
+            $myResult = $stmt->get_result();
+
+            while($row=mysqli_fetch_assoc($myResult)){
+                echo $row["LastName"]." ".$row["FirstName"]." is ".$row["Age"]." years old<br>";
+            }
         }
     ?>
     <form action="" method="get">

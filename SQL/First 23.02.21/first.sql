@@ -7,6 +7,6 @@ CREATE TABLE PPL(
     LastName varchar(50),
     Age int,
     primary key (ID_PERSON)
-)
+);
 
 INSERT INTO PPL (LastName, FirstName,Age) VALUES("Perez","Pepe",32);

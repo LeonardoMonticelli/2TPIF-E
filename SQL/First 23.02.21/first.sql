@@ -9,4 +9,6 @@ CREATE TABLE PPL(
     primary key (ID_PERSON)
 );
 
-INSERT INTO PPL (LastName, FirstName,Age) VALUES("Perez","Pepe",32);
+INSERT INTO PPL (LastName, FirstName,Age) VALUES(
+    ("Perez","Pepe",32),
+);

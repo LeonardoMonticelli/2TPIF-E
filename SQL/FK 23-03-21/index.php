@@ -12,8 +12,8 @@
     <?php
         if(isset($_POST["NewCountry"])){
             include_once("DBconnect.php");
-            $sqlinsert=$connection->prepare("INSERT INTO countries(countryName) values(?)");
-            $sqlinsert-> bind_param("s",$_POST["NewCountry"]);
+            $sqlinsert=$connection->prepare("INSERT INTO COUNTRIES (CountryName) values (?)");
+            $sqlinsert->bind_param("s",$_POST["NewCountry"]);
             $sqlinsert->execute();
         }
     ?>

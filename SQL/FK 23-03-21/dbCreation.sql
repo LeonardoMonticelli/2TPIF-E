@@ -1,15 +1,19 @@
-create or replace database wsers2;
+drop database wsers2; 
+create database wsers2;
 use wsers2;
+
+CREATE TABLE COUNTRIES(
+    ID_Country int not NULL AUTO_INCREMENT,
+    CountryName varchar(50),
+    primary key (ID_Country)
+);
 
 CREATE TABLE PPL(
     ID_PERSON int NOT NULL AUTO_INCREMENT,
     FirstName varchar(50),
     LastName varchar(50),
     Age int,
-    primary key (ID_PERSON)
+    ID_Country int,
+    primary key (ID_PERSON),
+    foreign key (ID_Country) references COUNTRIES(ID_Country)
 );
-
-CREATE TABLE COUNTRIES(
-    Country_ID int not NULL,
-    CoutryName varchar(50)
-)

@@ -12,6 +12,7 @@ CREATE TABLE PPL(
     ID_PERSON int NOT NULL AUTO_INCREMENT,
     FirstName varchar(50),
     LastName varchar(50),
+    Pswd varchar(100),
     Age int,
     ID_Country int,
     primary key (ID_PERSON),

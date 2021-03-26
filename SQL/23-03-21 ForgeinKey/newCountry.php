@@ -14,11 +14,14 @@
             include_once("DBconnect.php");
             $sqlinsert=$connection->prepare("INSERT INTO COUNTRIES (CountryName) values (?)");
             $sqlinsert->bind_param("s",$_POST["NewCountry"]);
-            $sqlinsert->execute();
+            $executeResult=$sqlinsert->execute();
+            if(!$executeResult){
+                print "Creation of a new country failed<br>";
+            }
         }
     ?>
     <form action="" method="post">
-        Type the name of the country:<input name="NewCountry">
+        Add a new country:<input name="NewCountry">
         <input type="submit" value="Add">
     </form>
 </body>

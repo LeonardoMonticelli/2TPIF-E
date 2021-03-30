@@ -12,6 +12,16 @@
     <?php
         if(isset($_POST["Username"],$_POST["Pswd"])){
             include_once("dbConnect.php");
+            $sql = $connection->prepare("Select * from ppl where username=?");
+            if(!$sql){
+                die("error in your sql");
+            }
+            $sql->bind_param("s",$_POST["username"]);
+            if(!$sql->execute()){
+                die("Error executing sql statement");
+            }
+            $result=$sql->execute();
+            
         }
     ?>
     <form action="" method="post">

@@ -10,6 +10,12 @@
 </head>
 <body>
     <?php
+        include_once "DBconnect.php";
+        if(isset($_POST["Logout"])){
+            session_unset();
+            session_destroy();
+
+        }
         if(isset($_POST["Username"],$_POST["Pswd"])){
             include_once("dbConnect.php");
             $sql = $connection->prepare("Select * from ppl where username=?");
@@ -21,7 +27,21 @@
                 die("Error executing sql statement");
             }
             $result=$sql->execute();
-            
+            if($result->$num_rows==0){
+
+            } else{
+                if(){
+                    print "Your typed the correct password. You are now logged in";
+                    $_SESSION[""];
+                } else {
+                    print "wrong password.";
+                }
+            }
+        }
+        if($_SESSION["isUserLoggedIn"]){
+            ?>
+                <h1>Logout</h1>
+            <?php
         }
     ?>
     <form action="" method="post">

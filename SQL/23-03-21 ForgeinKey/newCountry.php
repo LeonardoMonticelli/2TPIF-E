@@ -10,14 +10,18 @@
 </head>
 <body>
     <?php
-        if(isset($_POST["NewCountry"])){
-            include_once("DBconnect.php");
-            $sqlinsert=$connection->prepare("INSERT INTO COUNTRIES (CountryName) values (?)");
-            $sqlinsert->bind_param("s",$_POST["NewCountry"]);
-            $executeResult=$sqlinsert->execute();
-            if(!$executeResult){
-                print "Creation of a new country failed<br>";
+        include_once("DBconnect.php");
+        if($_SESSION["isUserLoggedIn"]){
+            if(isset($_POST["NewCountry"])){
+                $sqlinsert=$connection->prepare("INSERT INTO COUNTRIES (CountryName) values (?)");
+                $sqlinsert->bind_param("s",$_POST["NewCountry"]);
+                $executeResult=$sqlinsert->execute();
+                if(!$executeResult){
+                    print "Creation of a new country failed<br>";
+                }
             }
+        } else {
+            print "access denied, please log in first.";
         }
     ?>
     <form action="" method="post">

@@ -14,7 +14,7 @@
         if(isset($_POST["Logout"])){
             session_unset();
             session_destroy();
-
+            $_SESSION["isUserLoggedIn"]=true;
         }
         if(isset($_POST["Username"],$_POST["Pswd"])){
             include_once("dbConnect.php");
@@ -28,11 +28,12 @@
             }
             $result=$sql->execute();
             if($result->$num_rows==0){
-
+                print "Your username is not in our database";
             } else{
-                if(){
+                $row = $result->fetch_assoc();
+                if(password_verify($_POST["Pswd"],$row["Pswd"])){
                     print "Your typed the correct password. You are now logged in";
-                    $_SESSION[""];
+                    $_SESSION["isUserLoggedIn"]=true;
                 } else {
                     print "wrong password.";
                 }
@@ -42,12 +43,15 @@
             ?>
                 <h1>Logout</h1>
             <?php
+        } else{
+            ?>
+                <form action="" method="post">
+                Username: <input type="text" name="Username" id="">
+                Password: <input type="text" name="Pswd" id="">
+                <input type="submit" name="Login" id="">
+                </form>
+           <?php 
         }
     ?>
-    <form action="" method="post">
-        Username: <input type="text" name="Username" id="">
-        Password: <input type="text" name="Pswd" id="">
-        <input type="submit" name="Login" id="">
-    </form>
 </body>
 </html>

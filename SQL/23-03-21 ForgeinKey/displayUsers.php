@@ -21,7 +21,14 @@
         <?php
             include_once("dbConnect.php");
             $sqlSelect=$connection->prepare("SELECT * from ppl left join countries on ppl.ID_COUNTRY = countries.ID_COUNTRY");
-            
+            if(!$sqlSelect){
+                die("Error in the sql select");
+            }
+            $succeeded = $sqlSelect->execute();
+            if(!$succeeded){
+                die("Something went wrong when executing the query");
+            }
+            $result = $sqlSelect->get_result();
         ?>
     </table>
 </body>

@@ -17,16 +17,24 @@
                 $sqlinsert->bind_param("s",$_POST["NewCountry"]);
                 $executeResult=$sqlinsert->execute();
                 if(!$executeResult){
-                    print "Creation of a new country failed<br>";
+                    echo "Creation of a new country failed<br>";
                 }
             }
         } else {
-            print "access denied, please log in first.";
+            echo "ER: access denied, please log in first.";
         }
     ?>
     <form action="" method="post">
         Add a new country:<input name="NewCountry">
         <input type="submit" value="Add">
+    </form>
+    <?php
+        if(isset($_POST["NewCountry"])){
+            echo "New country added.";
+        }
+    ?>
+    <form action="Signup.php">
+        <input type="submit" value="Go to signup">
     </form>
 </body>
 </html>

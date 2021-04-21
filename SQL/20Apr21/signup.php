@@ -12,56 +12,57 @@
     <?php
         include_once("dbConnect.php");
 
-        if (isset($_POST["FName"],$_POST["LName"],$_POST["UsrName"],$_POST["Psw"],$_POST["Psw2"])){
-                print "We are signing you up!";
-                if ($_POST["Psw"] == $_POST["Psw2"]) {
-                    //we are ok -we will start instert this into db
-        
-                    $sql = $connection->prepare("INSERT INTO PEOPLE(FName, LName, UsrName, Psw) VALUES(?,?,?,?)");
+        if (isset($_POST["FirstName"],$_POST["LastName"],$_POST["UserName"],$_POST["Password"],$_POST["Password2"])){
+                echo "We are signing you up!<br>";
+
+                if ($_POST["Password"] == $_POST["Password2"]) {        
+                    $sql = $connection->prepare("INSERT INTO PEOPLE(FName, LName, UsrName, Psw, C_ID, UserRole) VALUES(?,?,?,?,?,?)");
         
                     if (!$sql) {
-                        print "Error in your sql";
+                        echo "Error in your sql<br>";
                     }
         
-                    $hashedPassword = password_hash($_POST["Psw"], PASSWORD_BCRYPT);
+                    $hashedPassword = password_hash($_POST["Password"], PASSWORD_BCRYPT);
+                    $user = "user";
         
                     $sql->bind_param(
-                        "ssss",
-                        $_POST["FName"],
-                        $_POST["LName"],
-                        $_POST["UsrName"],
+                        "ssssis",
+                        $_POST["FirstName"],
+                        $_POST["LastName"],
+                        $_POST["UserName"],
                         $hashedPassword,
+                        $_POST["Country"],
+                        $user
                     );
         
                     $SQLexecute = $sql->execute();
-                    if ($SQLexecute) {
-                        print "We are done. Please check the database!";
+                    if (!$SQLexecute) {
+                        echo 'Problem running SQLexecute. <br>';
+                        echo $sql->error;
                     } else {
-                        print 'Problem running SQLexecute.';
+                        echo "You are signed up. Please check the database!<br>";
                     }
                 } else {
-                    print "Passwords do not match.";
+                    echo "Passwords do not match.<br>";
                 }
             }
             ?>
             <h1>Welcome to our page. You will signup here</h1>
             <div class="container">
                 <form class="myRegistration" method="POST"><BR>
-                    <label for="FirstName">First Name</label> <input name="FName"><BR>
-                    <label for="LastName">Last Name</label> <input name="LName"><BR>
-                    <label for="UserName">Username</label> <input name="UsrName"><BR>
-                    <label for="Psw">Password</label> <input name="Psw" type="password"><BR>
-                    <label for="Psw2">Re-type Password</label> <input name="Psw2" type="password"><BR>
+                    <label for="FirstName">First Name</label> <input name="FirstName"><BR>
+                    <label for="LastName">Last Name</label> <input name="LastName"><BR>
+                    <label for="UserName">Username</label> <input name="UserName"><BR>
+                    <label for="Psw">Password</label> <input name="Password" type="password"><BR>
+                    <label for="Psw2">Re-type Password</label> <input name="Password2" type="password"><BR>
         
                     <label for="Country">Choose your country of origin:</label>
                     <select name="Country">
-        
                         <?php
                         $sqlSelect = $connection->prepare("SELECT * from COUNTRIES");
                         $selectionWentOK = $sqlSelect->execute();
         
                         if ($selectionWentOK) {
-        
                             $result = $sqlSelect->get_result();
                             while ($row = $result->fetch_assoc()) {
                         ?>
@@ -69,15 +70,13 @@
                         <?php
                             }
                         } else {
-                            print "Something went wrong when selecting data";
+                            echo "Something went wrong when selecting data";
                         }
                         ?>
-        
                     </select>
         
                     <input type="submit" name="submit">
                 </form>
-        
-                        <p><a href="login.php">Click here to go to Login Page!</p>
+                        <p><a href="login.php">Login Page</p>
 </body>
 </html>

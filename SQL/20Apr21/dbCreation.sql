@@ -1,12 +1,12 @@
 drop database wsers2;
 
-create database wsers2;
+CREATE database wsers2;
 use wsers2;
 
-Create table COUNTRIES (
+CREATE TABLE COUNTRIES (
     C_ID int not null AUTO_INCREMENT,
     C_Name varchar(50) UNIQUE,
-    C_Population number(12),
+    C_Population int,
     primary key (C_ID)
 );
 
@@ -17,8 +17,9 @@ CREATE TABLE PEOPLE (
     UsrName varchar(20) NOT NULL UNIQUE,
     Psw varchar(100) NOT NULL,
     primary key (P_ID),
-    C_ID int not null,
-    foreign key (C_ID) references COUNTRIES(C_ID)
+    C_ID int,
+    foreign key (C_ID) references COUNTRIES(C_ID),
+    UserRole varchar(10)
 );
 
 CREATE TABLE PRODUCTS(
@@ -27,6 +28,6 @@ CREATE TABLE PRODUCTS(
     Pr_Price int,
     Pr_ItemsInStock int,
     primary key (Pr_ID)
-)
+);
 
-Insert into COUNTRIES(CountryName) values ("Luxembourg");
+Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);

@@ -49,12 +49,12 @@
             ?>
             <h1>Welcome to our page. You will signup here</h1>
             <div class="container">
-                <form class="myRegistration" method="POST"><BR>
-                    <label for="FirstName">First Name</label> <input name="FirstName"><BR>
-                    <label for="LastName">Last Name</label> <input name="LastName"><BR>
-                    <label for="UserName">Username</label> <input name="UserName"><BR>
-                    <label for="Psw">Password</label> <input name="Password" type="password"><BR>
-                    <label for="Psw2">Re-type Password</label> <input name="Password2" type="password"><BR>
+                <form class="myRegistration" method="POST">
+                    <label for="FirstName">First Name</label> <input name="FirstName">
+                    <label for="LastName">Last Name</label> <input name="LastName">
+                    <label for="UserName">Username</label> <input name="UserName">
+                    <label for="Psw">Password</label> <input name="Password" type="password">
+                    <label for="Psw2">Re-type Password</label> <input name="Password2" type="password">
         
                     <label for="Country">Choose your country of origin:</label>
                     <select name="Country">

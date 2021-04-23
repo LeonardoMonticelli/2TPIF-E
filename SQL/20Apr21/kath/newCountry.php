@@ -11,9 +11,7 @@
 <body>
     <?php
     include_once("dbConnect.php");
-    if($_SESSION["isUserLoggedIn"])
-    {
-
+    if($_SESSION["isUserLoggedIn"]){
         if(isset($_POST["NewCountry"])){
             $sqlInsert = $connection->prepare("INSERT INTO countries (CountryName) values(?)");
             $sqlInsert->bind_param("s", $_POST["NewCountry"]);
@@ -21,8 +19,7 @@
             if(!$resultOfExecute){
                 print "Creation of country, failed.";
             }
-        }
-        
+        }  
     } else {
         die("Access denied. Please login first");
     }
@@ -43,7 +40,6 @@
         <?php
         $sqlSelect = $connection->prepare("SELECT CountryName from Countries");
         $selectionWentOK = $sqlSelect->execute();
-
         if($selectionWentOK){
 
             $result = $sqlSelect->get_result();

@@ -31,3 +31,4 @@ CREATE TABLE PRODUCTS(
 );
 
 Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);
+Insert into PRODUCTS(Pr_Name, Pr_Price, Pr_ItemsInStock) values ("Potato", 69, 420);

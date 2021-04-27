@@ -10,7 +10,8 @@
 </head>
 <body>
     <?php
-        include_once("dbConnect.php");
+        include_once "navBar.php";
+        include_once "dbConnect.php";
 
         if (isset($_POST["FirstName"],$_POST["LastName"],$_POST["UserName"],$_POST["Password"],$_POST["Password2"])){
                 echo "We are signing you up!<br>";
@@ -77,6 +78,5 @@
         
                     <input type="submit" name="submit">
                 </form>
-                        <p><a href="login.php">Login Page</p>
 </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+    include_once "navBar.php";
     include_once "dbConnect.php";
     if($_SESSION["isUserLoggedIn"]){
         ?>
@@ -49,9 +50,6 @@
                             }
                         ?>
                     </table>
-
-                    <p><a href="login.php">Login Page</p>
-                    <p><a href="Signup.php">Signup page</p>
                 </body>
             </html>
         <?php

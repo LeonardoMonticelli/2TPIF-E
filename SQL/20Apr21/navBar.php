@@ -29,12 +29,15 @@
  </head>
  <body>
    <?php
+      include_once "dbConnect.php";
       $pages = array();
       $pages["signup.php"] = "Signup";
       $pages["login.php"] = "Login";
-      $pages["addCountry.php"] = "Add a country";
-      $pages["addProducts.php"] = "Add a product";
-      $pages["viewProducts.php"] = "View products";
+      if($_SESSION["isUserLoggedIn"]){
+         $pages["addCountry.php"] = "Add a country";
+         $pages["addProducts.php"] = "Add a product";
+         $pages["viewProducts.php"] = "View products";
+      } 
    ?>     
    <div class="topnav">
       <?php foreach($pages as $url=>$title){?>

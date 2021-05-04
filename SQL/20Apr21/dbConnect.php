@@ -4,6 +4,10 @@ if(!isset($_SESSION["isUserLoggedIn"])){
     $_SESSION["isUserLoggedIn"] = false;
 }
 
+if(!$_SESSION["role"]){
+    $_SESSION["role"] = "user";
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "";

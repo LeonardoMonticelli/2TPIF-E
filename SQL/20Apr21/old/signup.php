@@ -5,7 +5,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Signup</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href=''>
     <script src=''></script>
 </head>
 <body>
@@ -49,7 +49,7 @@
             }
             ?>
             <h1>Welcome to our page. You will signup here</h1>
-            <div class="">
+            <div class="container">
                 <form class="myRegistration" method="POST">
                     <label for="FirstName">First Name</label> <input name="FirstName">
                     <label for="LastName">Last Name</label> <input name="LastName">

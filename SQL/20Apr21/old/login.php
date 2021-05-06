@@ -6,7 +6,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Login</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href=''>
     <script src=''></script>
 </head>
 
@@ -25,7 +25,7 @@
         <?php
     } else {?>
         <h1>Welcome to this login page of this website</h1>
-        <form action="" method="POST">
+        <form method="POST">
             <label for="UserName">Please type your Username</label> <input name="Username">
             <label for="UserName">Password</label> <input name="Password" type="password">
             <input type="submit" value="login">
@@ -37,7 +37,6 @@
                 session_unset();
                 session_destroy();
                 $_SESSION["isUserLoggedIn"] = false;
-                header("Location: login.php");
             }
 
             if(isset($_POST["Username"],$_POST["Password"])){
@@ -62,12 +61,12 @@
                         print "You are now logged in";
                         $_SESSION["isUserLoggedIn"] = true;
                         $_SESSION["role"] = $row["UserRole"];
-                        header("Location: login.php");
                     } else {
                         print "The data you provided does not match with the one in our servers.";
                     }
                 }
             }
         ?>
+        <p><a href="addCountry.php">Create a new Country</p>
 </body>
 </html>

@@ -17,8 +17,8 @@ CREATE TABLE PEOPLE (
     UsrName varchar(20) NOT NULL UNIQUE,
     Psw varchar(100) NOT NULL,
     primary key (P_ID),
-    C_ID int,
-    foreign key (C_ID) references COUNTRIES(C_ID),
+    CountryID int,
+    foreign key (CountryID) references COUNTRIES(C_ID),
     UserRole varchar(10)
 );
 
@@ -28,6 +28,17 @@ CREATE TABLE PRODUCTS(
     Pr_Price int,
     Pr_ItemsInStock int,
     primary key (Pr_ID)
+);
+
+CREATE TABLE ORDERS(
+    O_ID int NOT NULL AUTO_INCREMENT,
+    PersonID int,
+    foreign key (PersonID) references PEOPLE(P_ID)
+);
+
+CREATE TABLE ORDERCONTENTS(
+    OrderID int ,
+    foreign key (OrderID) references ORDERS(O_ID)
 );
 
 Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);

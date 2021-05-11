@@ -17,12 +17,7 @@
     include_once "dbConnect.php";
 
     if($_SESSION["isUserLoggedIn"]){
-        echo "you are now logged in."
-        ?>
-        <form method="POST">
-        <input type="submit" value="logout" name="logout">
-        </form>
-        <?php
+        echo "you are now logged in.";
     } else {?>
         <h1>Welcome to this login page of this website</h1>
         <form action="" method="POST">
@@ -32,14 +27,6 @@
         </form>
         <?php
             }
-
-            if(isset($_POST["logout"])){
-                session_unset();
-                session_destroy();
-                $_SESSION["isUserLoggedIn"] = false;
-                header("Location: login.php");
-            }
-
             if(isset($_POST["Username"],$_POST["Password"])){
 
                 $sql = $connection->prepare("select * from PEOPLE where UsrName=?");

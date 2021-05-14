@@ -18,8 +18,9 @@ CREATE TABLE PEOPLE (
     Psw varchar(100) NOT NULL,
     primary key (P_ID),
     C_ID int,
-    foreign key (C_ID) references COUNTRIES(C_ID),
-    UserRole varchar(10)
+    UserRole varchar(10),
+        foreign key (C_ID) references COUNTRIES(C_ID)
+        ON DELETE SET NULL
 );
 
 CREATE TABLE PRODUCTS(
@@ -30,5 +31,19 @@ CREATE TABLE PRODUCTS(
     primary key (Pr_ID)
 );
 
+CREATE TABLE ORDERS(
+    PersonID int, 
+    O_ID int not null AUTO_INCREMENT,
+    foreign key (PersonID) references COUNTRIES(P_ID)
+)
+
+CREATE TABLE ORDERCONTENTS(
+    OrderID int,
+    ItemToBuy varchar(50),
+    foreign key (OrderID) references ORDERS(O_ID),
+    foreign key (ItemToBuy) references PRODUCTS(Pr_Name)
+)
+
 Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);
 Insert into PRODUCTS(Pr_Name, Pr_Price, Pr_ItemsInStock) values ("Potato", 69, 420);
+Insert into PEOPLE(FName, LName, UsrName, Psw, C_ID, UserRole) values ("user","test","utest", 123, 1,"user");

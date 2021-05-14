@@ -22,7 +22,15 @@
                             if(!$resultOfExecute){
                                 print "Creation of country, failed.";
                             }
-                        }  
+                        }
+                        if(isset($_POST["deleteC"])){ 
+                            $sqlDelete = $connection->prepare("DELETE from countries where C_ID=?");
+                            if(!$sqlDelete){
+                                die("Error in sql selete statement");
+                            }
+                            $sqlDelete->bind_param("i",$_POST["deleteC"]);
+                            $sqlDelete->execute();
+                        }
                     ?>                    
                     <form method="POST">
                         Type the name of the new country:<input name="NewCountry"> 
@@ -36,13 +44,18 @@
                         </th>
 
                         <?php
-                            $sqlSelect = $connection->prepare("select C_Name from countries");
+                            $sqlSelect = $connection->prepare("SELECT * from countries");
                             $selectExe = $sqlSelect->execute();
                             if($selectExe){
                                 $result = $sqlSelect->get_result();
                                 while($row=$result->fetch_assoc()){
                                     ?>
-                                    <tr><td><?=$row["C_Name"]?></td></tr>
+                                    <tr><td><?=$row["C_Name"]?> 
+                                        <form method="post">
+                                            <input type="hidden" value="<?=$row["C_ID"]?>" name="deleteC">
+                                            <input type="submit" value="Delete">
+                                        </form>
+                                    </td></tr>
                                     <?php
                                 }
                             } else {

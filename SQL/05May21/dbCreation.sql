@@ -34,15 +34,18 @@ CREATE TABLE PRODUCTS(
 CREATE TABLE ORDERS(
     PersonID int, 
     O_ID int not null AUTO_INCREMENT,
-    foreign key (PersonID) references COUNTRIES(P_ID)
-)
+    primary key (O_ID),
+    foreign key (PersonID) references PEOPLE(P_ID)
+);
 
 CREATE TABLE ORDERCONTENTS(
+    OC_ID int not null AUTO_INCREMENT,
     OrderID int,
-    ItemToBuy varchar(50),
+    ItemToBuy int,
+    primary key (OC_ID),
     foreign key (OrderID) references ORDERS(O_ID),
-    foreign key (ItemToBuy) references PRODUCTS(Pr_Name)
-)
+    foreign key (ItemToBuy) references PRODUCTS(Pr_ID)
+);
 
 Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);
 Insert into PRODUCTS(Pr_Name, Pr_Price, Pr_ItemsInStock) values ("Potato", 69, 420);

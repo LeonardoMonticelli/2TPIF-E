@@ -49,4 +49,3 @@ CREATE TABLE ORDERCONTENTS(
 
 Insert into COUNTRIES(C_Name, C_Population) values ("Luxembourg", 250000);
 Insert into PRODUCTS(Pr_Name, Pr_Price, Pr_ItemsInStock) values ("Potato", 69, 420);
-Insert into PEOPLE(FName, LName, UsrName, Psw, C_ID, UserRole) values ("user","test","utest", 123, 1,"user");

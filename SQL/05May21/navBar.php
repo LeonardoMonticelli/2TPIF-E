@@ -51,6 +51,7 @@
             case 'admin':
                $pages["addCountry.php"] = "Add a country";
                $pages["addProducts.php"] = "Add a product";
+               $pages["viewProducts.php"] = "View products";
                break;
             case 'user':
                $pages["viewProducts.php"] = "View products";

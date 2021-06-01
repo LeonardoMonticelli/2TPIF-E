@@ -23,10 +23,10 @@
                 $sqlInsert->bind_param("sis", $_POST["NewProduct"], $_POST["PriceProduct"], $_POST["StockProduct"]);
                 $resultOfExecute = $sqlInsert->execute();
                 if(!$resultOfExecute){
-                    print "Creation of product, failed.<br>";
+                    print "Creation of product, failed.";
                     echo $sql->error;
                 } else {
-                    echo "You are signed up. Please check the database!<br>";
+                    echo "Product added succesfully!";
                 }
             }  
 ?>                    

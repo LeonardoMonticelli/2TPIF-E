@@ -54,6 +54,7 @@
                break;
             case 'user':
                $pages["viewProducts.php"] = "View products";
+               $pages["shoppingCart.php"] = "Checkout";
                break;
          }
      }

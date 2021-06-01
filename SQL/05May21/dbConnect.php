@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION["isUserLoggedIn"])){
     $_SESSION["isUserLoggedIn"] = false;
 }
-$_SESSION["ShoppingCart"] = array();
+$_SESSION["shoppingCart"] = array();
 
 if(!isset($_SESSION["role"])){
     $_SESSION["role"] = "user";

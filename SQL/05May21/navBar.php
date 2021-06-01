@@ -52,13 +52,14 @@
                $pages["addCountry.php"] = "Add a country";
                $pages["addProducts.php"] = "Add a product";
                $pages["viewProducts.php"] = "View products";
+               $pages["shoppingCart.php"] = "Checkout: ".sizeof($_SESSION["shoppingCart"])." items";
                break;
             case 'user':
                $pages["viewProducts.php"] = "View products";
-               $pages["shoppingCart.php"] = "Checkout";
+               $pages["shoppingCart.php"] = "Checkout: ".sizeof($_SESSION["shoppingCart"])." items";
                break;
          }
-     }
+      }
      
       if(isset($_POST["logout"])){
          session_unset();

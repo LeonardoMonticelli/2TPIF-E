@@ -15,6 +15,7 @@
             </tr>
     
             <?php
+            if (isset($_POST["ProductToBuy"]))
                 $sqlSelect = $connection->prepare("select Pr_ID, Pr_Name, Pr_Price, Pr_ItemsInStock from PRODUCTS");
                 $selectExe = $sqlSelect->execute();
                 if($selectExe){
@@ -39,7 +40,7 @@
                                     <input type="hidden" value="<?= $row["Pr_ID"]?>" name="buyPr">
                                     <input type="text" value=0 name="howManyItems">
                                     <input type="submit" value="Buy">
-                                </form>
+                                </form> 
                             <?php }?>
                         </tr>
                         <?php
@@ -54,6 +55,7 @@
                     }
                     $sqlDelete->bind_param("i",$_POST["deletePr"]);
                     $sqlDelete->execute();
+                    Header('Location: '.$_SERVER['PHP_SELF']);
                 }
             ?>
         </table>

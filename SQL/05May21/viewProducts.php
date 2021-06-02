@@ -15,10 +15,11 @@
             </tr>
     
             <?php
-            if (isset($_POST["ProductToBuy"]))
+            // if (isset($_POST["ProductToBuy"])){
                 $sqlSelect = $connection->prepare("select Pr_ID, Pr_Name, Pr_Price, Pr_ItemsInStock from PRODUCTS");
                 $selectExe = $sqlSelect->execute();
-                if($selectExe){
+                if($selectExe)
+                {
                     $result = $sqlSelect->get_result();
                     while($row=$result->fetch_assoc()){
                         ?>
@@ -57,6 +58,7 @@
                     $sqlDelete->execute();
                     Header('Location: '.$_SERVER['PHP_SELF']);
                 }
+            // }    
             ?>
         </table>
         <?php

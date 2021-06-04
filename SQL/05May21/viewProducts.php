@@ -1,6 +1,11 @@
 <?php
-    include_once "navBar.php";
     include_once "dbConnect.php";
+    if (isset($_POST["ProductToBuy"])){
+        // array_push($_SESSION["shoppingCart"],$_POST["ProductToBuy"]);
+        // ALTERNATIVE:
+        $_SESSION["shoppingCart"][$_POST["ProductToBuy"]] = $_POST["howManyItems"];
+    }
+    include_once "navBar.php"; 
     if(!$_SESSION['isUserLoggedIn']) {
         // header("Location: /");
         die("Unauthorised, you are not an user");
@@ -15,7 +20,6 @@
             </tr>
     
             <?php
-            // if (isset($_POST["ProductToBuy"])){
                 $sqlSelect = $connection->prepare("select Pr_ID, Pr_Name, Pr_Price, Pr_ItemsInStock from PRODUCTS");
                 $selectExe = $sqlSelect->execute();
                 if($selectExe)
@@ -29,19 +33,21 @@
                             <td><?=$row["Pr_Price"]?> Euros</td>
                             <td><?=$row["Pr_ItemsInStock"]?></td>
                             <?php if(isset($_SESSION['role']) && $_SESSION["role"] == "admin"){?>
-                            <td>
-                                <!-- the delete is taking two clicks to act -->
-                                <form method="post">
-                                    <input type="hidden" value="<?= $row["Pr_ID"]?>" name="deletePr">
-                                    <input type="submit" value="Delete">
-                                </form>
-                            </td>
+                                <td>
+                                    <!-- the delete is taking two clicks to act -->
+                                    <form method="post">
+                                        <input type="hidden" value="<?= $row["Pr_ID"]?>" name="deletePr">
+                                        <input type="submit" value="Delete">
+                                    </form>
+                                </td>
                             <?php } else{?>
-                                <form method="post">
-                                    <input type="hidden" value="<?= $row["Pr_ID"]?>" name="buyPr">
-                                    <input type="text" value=0 name="howManyItems">
-                                    <input type="submit" value="Buy">
-                                </form> 
+                                <td>
+                                    <form method="post">
+                                        <input type="hidden" value="<?= $row["Pr_ID"]?>" name="buyPr">
+                                        <input type="number" value=0 name="howManyItems">
+                                        <input type="submit" value="Buy">
+                                    </form>
+                                </td>
                             <?php }?>
                         </tr>
                         <?php
@@ -58,7 +64,7 @@
                     $sqlDelete->execute();
                     Header('Location: '.$_SERVER['PHP_SELF']);
                 }
-            // }    
+              
             ?>
         </table>
         <?php

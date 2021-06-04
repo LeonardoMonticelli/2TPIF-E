@@ -42,6 +42,7 @@ CREATE TABLE ORDERCONTENTS(
     OC_ID int not null AUTO_INCREMENT,
     OrderID int,
     ItemToBuy int,
+    HowMany int,
     primary key (OC_ID),
     foreign key (OrderID) references ORDERS(O_ID),
     foreign key (ItemToBuy) references PRODUCTS(Pr_ID)

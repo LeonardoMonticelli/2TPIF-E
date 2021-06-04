@@ -13,8 +13,54 @@
         include_once "dbConnect.php";
 
         if(isset($_POST["itemToDelete"])){
-
+            unset($_SESSION["ShoppingCart"][$_POST["itemToDelete"]]);
         }
+
+        if(isset($_POST["buyAll"])){
+            $sqlInsert = $connection->prepare("INSERT into ORDERS(personOrder) values(?)");
+            $sqlInsert->bind_param("s",$_SESSION["CurrentUser"]);
+            $insertWentOk = $sqlInsert->execute();
+            foreach($_POST["shoppingCart"] as $key => $value){
+                $sqlInsert2 = $connection->prepare("INSERT into ORDERCONTENTS(OrderID,ItemToBuy,HowMany) values(?,?,?)");
+                $sqlInsert2->bind_param("iii",$newOrderId, $key, $value);
+                $insert2WentOk = $sqlInsert2->execute();
+            }
+            $_SESSION["shoppingCart"] = [];
+            print "Thank you for your order. It will be processed soon!";    
+        }
+        include_once "navBar.php"
     ?>
+    <h1>Shopping cart contents:</h1>
+    <table>
+        <tr>
+            <th>Product name:</th>
+            <th>You ordered:</th>
+            <th>The price:</th>
+        </tr>
+        <?php
+            $totalPrice =0;
+            foreach($_SESSION["shoppingCart"] as $key => $value){
+                $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where ID_PRODUCT=?");
+                $sqlSelect->bind_param("i",$value);
+                $selectionWentOk = $sqlSelect->execute();
+                if($selectionWentOk){
+                    $result = $sqlSelect->get_result();
+                    $row=$result->fetch_assoc();
+                    ?>
+                    <tr>
+                        <td><?=$row["ProductName"]?>;</td>
+                        <td><?=$value?></td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
+                                <input type="submit" value="Delete this item from the order">
+                            </form>
+                        </td>
+                    </tr>
+                    <?php
+                }
+            }
+        ?>
+    </table>
 </body>
 </html>

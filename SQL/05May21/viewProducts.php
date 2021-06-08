@@ -1,9 +1,18 @@
 <?php
     include_once "dbConnect.php";
-    if (isset($_POST["ProductToBuy"])){
-        // array_push($_SESSION["shoppingCart"],$_POST["ProductToBuy"]);
+    if (isset($_POST["buyPr"])){
+        array_push($_SESSION["shoppingCart"],$_POST["buyPr"]);
         // ALTERNATIVE:
-        $_SESSION["shoppingCart"][$_POST["ProductToBuy"]] = $_POST["howManyItems"];
+        // $_SESSION["shoppingCart"][$_POST["buyPr"]] = $_POST["howManyItems"];
+    }
+    if(isset($_POST["deletePr"])){ 
+        $sqlDelete = $connection->prepare("DELETE from PRODUCTS where Pr_ID=?");
+        if(!$sqlDelete){
+            die("Error in sql selete statement");
+        }
+        $sqlDelete->bind_param("i",$_POST["deletePr"]);
+        $sqlDelete->execute();
+        Header('Location: '.$_SERVER['PHP_SELF']);
     }
     include_once "navBar.php"; 
     if(!$_SESSION['isUserLoggedIn']) {
@@ -32,7 +41,7 @@
                             <td><?=$row["Pr_Name"]?></td>
                             <td><?=$row["Pr_Price"]?> Euros</td>
                             <td><?=$row["Pr_ItemsInStock"]?></td>
-                            <?php if(isset($_SESSION['role']) && $_SESSION["role"] == "admin"){?>
+                            <?php if($_SESSION['isUserLoggedIn'] && $_SESSION["role"] == "admin"){?>
                                 <td>
                                     <!-- the delete is taking two clicks to act -->
                                     <form method="post">
@@ -40,7 +49,7 @@
                                         <input type="submit" value="Delete">
                                     </form>
                                 </td>
-                            <?php } else{?>
+                            <?php } else {?>
                                 <td>
                                     <form method="post">
                                         <input type="hidden" value="<?= $row["Pr_ID"]?>" name="buyPr">
@@ -54,17 +63,7 @@
                     }
                 } else {
                     echo "Something went wrong when selecting data";
-                }
-                if(isset($_POST["deletePr"])){ 
-                    $sqlDelete = $connection->prepare("DELETE from PRODUCTS where Pr_ID=?");
-                    if(!$sqlDelete){
-                        die("Error in sql selete statement");
-                    }
-                    $sqlDelete->bind_param("i",$_POST["deletePr"]);
-                    $sqlDelete->execute();
-                    Header('Location: '.$_SERVER['PHP_SELF']);
-                }
-              
+                }             
             ?>
         </table>
         <?php

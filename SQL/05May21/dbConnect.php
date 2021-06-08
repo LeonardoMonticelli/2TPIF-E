@@ -3,9 +3,10 @@ session_start();
 if(!isset($_SESSION["isUserLoggedIn"])){
     $_SESSION["isUserLoggedIn"] = false;
 }
-
-if(!$_SESSION["shoppingCart"]){
-    $_SESSION["shoppingCart"] =[];
+if($_SESSION["isUserLoggedIn"]){
+    if(!isset($_SESSION["shoppingCart"])){
+        $_SESSION["shoppingCart"] =[];
+    }
 }
 
 if(!isset($_SESSION["role"])){

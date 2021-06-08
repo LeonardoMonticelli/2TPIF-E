@@ -13,7 +13,7 @@
         include_once "dbConnect.php";
 
         if(isset($_POST["itemToDelete"])){
-            unset($_SESSION["ShoppingCart"][$_POST["itemToDelete"]]);
+            unset($_SESSION["shoppingCart"][$_POST["itemToDelete"]]);
         }
 
         if(isset($_POST["buyAll"])){
@@ -40,16 +40,18 @@
         <?php
             $totalPrice =0;
             foreach($_SESSION["shoppingCart"] as $key => $value){
-                $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where ID_PRODUCT=?");
+                $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where Pr_ID=?");
                 $sqlSelect->bind_param("i",$value);
                 $selectionWentOk = $sqlSelect->execute();
                 if($selectionWentOk){
                     $result = $sqlSelect->get_result();
                     $row=$result->fetch_assoc();
+                    $totalPrice += $row["Pr_Price"] * $value;
                     ?>
                     <tr>
-                        <td><?=$row["ProductName"]?>;</td>
-                        <td><?=$value?></td>
+                        <td><?= $row["Pr_Name"]?></td>
+                        <td><?= $value?></td>
+                        <td><?= $row["Pr_Price"]?></td>
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="itemToDelete" value="<?=$key?>">

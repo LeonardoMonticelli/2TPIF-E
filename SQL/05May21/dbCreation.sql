@@ -30,10 +30,10 @@ CREATE TABLE PRODUCTS(
     Pr_ItemsInStock int,
     primary key (Pr_ID)
 );
-
 CREATE TABLE ORDERS(
     PersonID int, 
     O_ID int not null AUTO_INCREMENT,
+    Order_Status varchar(20),
     primary key (O_ID),
     foreign key (PersonID) references PEOPLE(P_ID)
 );

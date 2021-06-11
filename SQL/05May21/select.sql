@@ -1,0 +1,1 @@
+SELECT FName, LName, O_ID FROM PEOPLE, ORDERS where PersonID = P_ID;

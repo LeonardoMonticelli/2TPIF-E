@@ -16,9 +16,10 @@
             unset($_SESSION["shoppingCart"][$_POST["itemToDelete"]]);
         }
 
-        if(isset($_POST["buyAll"])){
-            $sqlInsert = $connection->prepare("INSERT into ORDERS(personOrder) values(?)");
-            $sqlInsert->bind_param("s",$_SESSION["CurrentUser"]);
+        if(isset($_POST["buyAll"]) && sizeof($_SESSION["shoppingCart"]) != 0){
+            $newOrderStatus = "Order in process.";
+            $sqlInsert = $connection->prepare("INSERT into ORDERS(PersonID,Order_Status) values((SELECT P_ID from people where UsrName=?),?);");
+            $sqlInsert->bind_param("ss",$_SESSION["CurrentUser"],$newOrderStatus);
             $insertWentOk = $sqlInsert->execute();
             foreach($_POST["shoppingCart"] as $key => $value){
                 $sqlInsert2 = $connection->prepare("INSERT into ORDERCONTENTS(OrderID,ItemToBuy,HowMany) values(?,?,?)");
@@ -27,6 +28,8 @@
             }
             $_SESSION["shoppingCart"] = [];
             print "Thank you for your order. It will be processed soon!";    
+        } else {
+            print "The shopping cart is emtpy.";
         }
         include_once "navBar.php"
     ?>

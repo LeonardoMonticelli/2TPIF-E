@@ -62,6 +62,14 @@
                             </form>
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <form action="" method="post">
+                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
+                                <input type="submit" value="Delete this item from the order">
+                            </form>
+                        </td>
+                    </tr>
                     <?php
                 }
             }

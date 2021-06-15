@@ -42,14 +42,16 @@
         </tr>
         <?php
             $totalPrice =0;
+            //var_dump($_SESSION["shoppingCart"]);
             foreach($_SESSION["shoppingCart"] as $key => $value){
+
                 $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where Pr_ID=?");
-                $sqlSelect->bind_param("i",$value);
+                $sqlSelect->bind_param("i",$key);
                 $selectionWentOk = $sqlSelect->execute();
                 if($selectionWentOk){
                     $result = $sqlSelect->get_result();
                     $row=$result->fetch_assoc();
-                    $totalPrice += $row["Pr_Price"] * $value;
+                    $totalPrice += $row['Pr_Price'] * $value;
                     ?>
                     <tr>
                         <td><?= $row["Pr_Name"]?></td>
@@ -65,13 +67,17 @@
                     <tr>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
-                                <input type="submit" value="Delete this item from the order">
+                                <input type="hidden" name="itemToBuy" value="<?=$key?>">
+                                <input type="submit" value="Buy">
                             </form>
                         </td>
                     </tr>
                     <?php
                 }
+                else{
+                    print "Not ok";
+                }
+               
             }
         ?>
     </table>

@@ -53,6 +53,7 @@
                $pages["addProducts.php"] = "Add a product";
                $pages["viewProducts.php"] = "View products";
                $pages["currentOrders.php"] = "View current orders";
+               $pages["shoppingCart.php"] = "Checkout: ".sizeof($_SESSION["shoppingCart"])." items";
                break;
             case 'user':
                $pages["viewProducts.php"] = "View products";

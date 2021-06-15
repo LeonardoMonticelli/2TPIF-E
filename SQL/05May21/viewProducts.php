@@ -3,7 +3,7 @@
     if (isset($_POST["addPr"])){
         // array_push($_SESSION["shoppingCart"],$_POST["addPr"]);
         // ALTERNATIVE:
-        if(isset($_SESSION["shoppingCart"][$_SESSION["addPr"]])){
+        if(isset($_SESSION["shoppingCart"][$_POST["addPr"]])){
             $_SESSION["shoppingCart"][$_POST["addPr"]] += $_POST["howManyItems"];
         } else {
             $_SESSION["shoppingCart"][$_POST["addPr"]] = $_POST["howManyItems"];

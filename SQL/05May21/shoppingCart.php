@@ -42,7 +42,6 @@
         </tr>
         <?php
             $totalPrice =0;
-            //var_dump($_SESSION["shoppingCart"]);
             foreach($_SESSION["shoppingCart"] as $key => $value){
 
                 $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where Pr_ID=?");
@@ -67,7 +66,7 @@
                     <tr>
                         <td>
                             <form action="" method="post">
-                                <input type="hidden" name="itemToBuy" value="<?=$key?>">
+                                <input type="hidden" name="buyAll" value="<?=$key?>">
                                 <input type="submit" value="Buy">
                             </form>
                         </td>

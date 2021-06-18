@@ -17,7 +17,7 @@
         //     header("location: login.php"); 
         //     die("Access denied");
         // } //This is to prevent for the admin to come in here
-        // print $_SESSION["currentUser"];
+
        $transacitonHistory = $connection ->prepare("SELECT orders.O_ID, orderstatus.Order_Status from orders, orderstatus where orders.PersonID=(SELECT P_ID from people where UsrName=?) and orders.Order_Status = orderstatus.Status_ID");
        $transacitonHistory->bind_param("s",$_SESSION["currentUser"]);
        $transacitonHistory->execute();

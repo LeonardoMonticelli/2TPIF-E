@@ -43,6 +43,17 @@
       include_once "dbConnect.php";
       $pages = array();
 
+      if($_SESSION['isUserLoggedIn']== true){
+         $sql = $connection->prepare("SELECT * from PEOPLE where UsrName=?");
+         $sql->bind_param("s", $_SESSION["currentUser"]);
+         $sql->execute();
+         $UserRole=$sql->get_result();
+         if($UserRole->num_rows==1){
+            $_SESSION["UserRole"] = "admin";
+         }
+         $sql->close();
+      }
+
       if(!$_SESSION['isUserLoggedIn']) {
          $pages["signup.php"] = "Signup";
          $pages["login.php"] = "Login";
@@ -52,7 +63,7 @@
                $pages["addCountry.php"] = "Add a country";
                $pages["addProducts.php"] = "Add a product";
                $pages["viewProducts.php"] = "View products";
-               $pages["currentOrders.php"] = "View current orders";
+               $pages["viewOrders.php"] = "View current orders";
                $pages["shoppingCart.php"] = "Checkout: ".sizeof($_SESSION["shoppingCart"])." items";
                break;
             case 'user':

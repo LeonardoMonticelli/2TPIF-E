@@ -16,21 +16,25 @@
             unset($_SESSION["shoppingCart"][$_POST["itemToDelete"]]);
         }
 
+        if(sizeof($_SESSION["shoppingCart"]) == 0) {
+            print "The shopping cart is emtpy.";
+        }
+
         if(isset($_POST["buyAll"]) && sizeof($_SESSION["shoppingCart"]) != 0){
             $newOrderStatus = "Order in process.";
             $sqlInsert = $connection->prepare("INSERT into ORDERS(PersonID,Order_Status) values((SELECT P_ID from people where UsrName=?),?);");
             $sqlInsert->bind_param("ss",$_SESSION["CurrentUser"],$newOrderStatus);
             $insertWentOk = $sqlInsert->execute();
-            foreach($_POST["shoppingCart"] as $key => $value){
+            $newOrderId = mysqli_insert_id($connection);
+            foreach($_SESSION["shoppingCart"] as $key => $value){
                 $sqlInsert2 = $connection->prepare("INSERT into ORDERCONTENTS(OrderID,ItemToBuy,HowMany) values(?,?,?)");
                 $sqlInsert2->bind_param("iii",$newOrderId, $key, $value);
                 $insert2WentOk = $sqlInsert2->execute();
             }
             $_SESSION["shoppingCart"] = [];
-            print "Thank you for your order. It will be processed soon!";    
-        } else {
-            print "The shopping cart is emtpy.";
-        }
+            print "Thank you for your order. It will be processed soon! ";    
+        } 
+
         include_once "navBar.php"
     ?>
     <h1>Shopping cart contents:</h1>
@@ -59,10 +63,11 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="itemToDelete" value="<?=$key?>">
-                                <input type="submit" value="Delete this item from the order">
+                                <input type="submit" value="Remove from order">
                             </form>
                         </td>
                     </tr>
+                   
                     <tr>
                         <td>
                             <form action="" method="post">
@@ -70,8 +75,9 @@
                                 <input type="submit" value="Buy">
                             </form>
                         </td>
-                    </tr>
+                    </tr> 
                     <?php
+                    print "The total price is: ".$totalPrice."€";
                 }
                 else{
                     print "Not ok";

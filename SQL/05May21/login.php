@@ -40,7 +40,7 @@
                 }
                 
                 $result = $sql->get_result();
-                
+
                 if($result->num_rows==0){
                     print "Your username is not in our database";
                 } else {
@@ -48,6 +48,7 @@
                     if(password_verify($_POST["Password"],$row["Psw"])){
                         print "You are now logged in";
                         $_SESSION["isUserLoggedIn"] = true;
+                        $_SESSION["currentUser"] = $_POST["Username"];
                         $_SESSION["role"] = $row["UserRole"];
                         header("Location: login.php");
                     } else {

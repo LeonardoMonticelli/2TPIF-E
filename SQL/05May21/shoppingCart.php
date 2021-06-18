@@ -21,9 +21,9 @@
         }
 
         if(isset($_POST["buyAll"]) && sizeof($_SESSION["shoppingCart"]) != 0){
-            $newOrderStatus = "Order in process.";
+            $newOrderStatus = 1;
             $sqlInsert = $connection->prepare("INSERT into ORDERS(PersonID,Order_Status) values((SELECT P_ID from people where UsrName=?),?);");
-            $sqlInsert->bind_param("ss",$_SESSION["CurrentUser"],$newOrderStatus);
+            $sqlInsert->bind_param("si", $_SESSION["currentUser"], $newOrderStatus);
             $insertWentOk = $sqlInsert->execute();
             $newOrderId = mysqli_insert_id($connection);
             foreach($_SESSION["shoppingCart"] as $key => $value){
@@ -61,30 +61,29 @@
                         <td><?= $value?></td>
                         <td><?= $row["Pr_Price"]?></td>
                         <td>
-                            <form action="" method="post">
-                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
+                            <form method="post">
+                                <input type="hidden" name="itemToDelete" value="D">
                                 <input type="submit" value="Remove from order">
                             </form>
                         </td>
                     </tr>
-                   
-                    <tr>
-                        <td>
-                            <form action="" method="post">
-                                <input type="hidden" name="buyAll" value="<?=$key?>">
-                                <input type="submit" value="Buy">
-                            </form>
-                        </td>
-                    </tr> 
                     <?php
-                    print "The total price is: ".$totalPrice."€";
                 }
                 else{
                     print "Not ok";
                 }
                
             }
+            print "The total price is: ".$totalPrice."€";
         ?>
+            <tr>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="buyAll" value="B">
+                        <input type="submit" value="Buy">
+                    </form>
+                </td>
+            </tr> 
     </table>
 </body>
 </html>

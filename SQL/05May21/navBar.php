@@ -63,9 +63,9 @@
                $pages["addCountry.php"] = "Add a country";
                $pages["addProducts.php"] = "Add a product";
                $pages["viewProducts.php"] = "View products";
-               // $pages["viewOrders.php"] = "View current orders";
                $pages["shoppingCart.php"] = "Checkout: ".sizeof($_SESSION["shoppingCart"])." items";
                $pages["orderList.php"] = "View current orders";
+               $pages["historyOfOrders.php"] = "View history";
                break;
             case 'user':
                $pages["viewProducts.php"] = "View products";

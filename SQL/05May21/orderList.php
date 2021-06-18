@@ -20,7 +20,7 @@
     ?>
         <div>
     <?php
-        $sqlSelect = $connection->prepare("SELECT O_ID, Usrname, orderstatus.Order_Status from orders, people, orderstatus where orders.PersonID=people.P_ID and orders.Order_Status=orderstatus.Status_ID");
+        $sqlSelect = $connection->prepare("SELECT O_ID, UsrName, orderstatus.Order_Status from orders, people, orderstatus where orders.PersonID=people.P_ID and orders.Order_Status=orderstatus.Status_ID");
         $selectionWentOK = $sqlSelect->execute();
     
         if($selectionWentOK){
@@ -36,13 +36,13 @@
                 <th>View</th>
             </tr>
             <?php
-                while($row = $result->fetch_assoc()){
+                while ($row = $result->fetch_assoc()) {
             ?>
                     <tr>
                         <td><?= $row["O_ID"]?></td>
                         <td><?= $row["UsrName"]?></td>
                         <td><?= $row["Order_Status"]?></td>
-                        <td><a href="viewOrders.php?O_ID=<?= $row["O_ID"]?>">View Order</a></td>
+                        <td><a href="viewOrders.php?orderID=<?= $row["O_ID"]?>">View Order</a></td>
                     </tr>
             <?php
                 }

@@ -31,19 +31,21 @@ CREATE TABLE PRODUCTS(
     primary key (Pr_ID)
 );
 
-CREATE TABLE ORDERS(
-    PersonID int, 
-    O_ID int not null AUTO_INCREMENT,
-    Order_Status int not null,
-    primary key (O_ID),
-    foreign key (PersonID) references PEOPLE(P_ID)
-);
-
 CREATE TABLE ORDERSTATUS(
     Status_ID int not null AUTO_INCREMENT,
     Order_Status varchar(20),
     primary key (Status_ID)
 );
+
+CREATE TABLE ORDERS(
+    PersonID int, 
+    O_ID int not null AUTO_INCREMENT,
+    Order_Status int not null,
+    primary key (O_ID),
+    foreign key (PersonID) references PEOPLE(P_ID),
+    foreign key (Order_Status) references ORDERSTATUS(Status_ID)
+);
+
 
 insert into ORDERSTATUS(Order_Status) values("Order sent");
 insert into ORDERSTATUS(Order_Status) values("Order processed");

@@ -17,7 +17,7 @@
         }
 
         if(sizeof($_SESSION["shoppingCart"]) == 0) {
-            print "The shopping cart is emtpy.";
+            print "The shopping cart is empty.";
         }
 
         if(isset($_POST["buyAll"]) && sizeof($_SESSION["shoppingCart"]) != 0){

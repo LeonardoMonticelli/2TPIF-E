@@ -16,21 +16,25 @@
             unset($_SESSION["shoppingCart"][$_POST["itemToDelete"]]);
         }
 
+        if(sizeof($_SESSION["shoppingCart"]) == 0) {
+            print "The shopping cart is empty.";
+        }
+
         if(isset($_POST["buyAll"]) && sizeof($_SESSION["shoppingCart"]) != 0){
-            $newOrderStatus = "Order in process.";
+            $newOrderStatus = 1;
             $sqlInsert = $connection->prepare("INSERT into ORDERS(PersonID,Order_Status) values((SELECT P_ID from people where UsrName=?),?);");
-            $sqlInsert->bind_param("ss",$_SESSION["CurrentUser"],$newOrderStatus);
+            $sqlInsert->bind_param("si", $_SESSION["currentUser"], $newOrderStatus);
             $insertWentOk = $sqlInsert->execute();
-            foreach($_POST["shoppingCart"] as $key => $value){
+            $newOrderId = mysqli_insert_id($connection);
+            foreach($_SESSION["shoppingCart"] as $key => $value){
                 $sqlInsert2 = $connection->prepare("INSERT into ORDERCONTENTS(OrderID,ItemToBuy,HowMany) values(?,?,?)");
                 $sqlInsert2->bind_param("iii",$newOrderId, $key, $value);
                 $insert2WentOk = $sqlInsert2->execute();
             }
             $_SESSION["shoppingCart"] = [];
-            print "Thank you for your order. It will be processed soon!";    
-        } else {
-            print "The shopping cart is emtpy.";
-        }
+            print "Thank you for your order. It will be processed soon! ";    
+        } 
+
         include_once "navBar.php"
     ?>
     <h1>Shopping cart contents:</h1>
@@ -43,37 +47,43 @@
         <?php
             $totalPrice =0;
             foreach($_SESSION["shoppingCart"] as $key => $value){
+
                 $sqlSelect = $connection->prepare("SELECT * from PRODUCTS where Pr_ID=?");
-                $sqlSelect->bind_param("i",$value);
+                $sqlSelect->bind_param("i",$key);
                 $selectionWentOk = $sqlSelect->execute();
                 if($selectionWentOk){
                     $result = $sqlSelect->get_result();
                     $row=$result->fetch_assoc();
-                    $totalPrice += $row["Pr_Price"] * $value;
+                    $totalPrice += $row['Pr_Price'] * $value;
                     ?>
                     <tr>
                         <td><?= $row["Pr_Name"]?></td>
                         <td><?= $value?></td>
                         <td><?= $row["Pr_Price"]?></td>
                         <td>
-                            <form action="" method="post">
-                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
-                                <input type="submit" value="Delete this item from the order">
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <form action="" method="post">
-                                <input type="hidden" name="itemToDelete" value="<?=$key?>">
-                                <input type="submit" value="Delete this item from the order">
+                            <form method="post">
+                                <input type="hidden" name="itemToDelete" value="D">
+                                <input type="submit" value="Remove from order">
                             </form>
                         </td>
                     </tr>
                     <?php
                 }
+                else{
+                    print "Not ok";
+                }
+               
             }
+            print "The total price is: ".$totalPrice."€";
         ?>
+            <tr>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="buyAll" value="B">
+                        <input type="submit" value="Buy">
+                    </form>
+                </td>
+            </tr> 
     </table>
 </body>
 </html>

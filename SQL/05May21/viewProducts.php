@@ -1,14 +1,13 @@
 <?php
     include_once "dbConnect.php";
     if (isset($_POST["addPr"])){
-        // array_push($_SESSION["shoppingCart"],$_POST["addPr"]);
-        // ALTERNATIVE:
-        if(isset($_SESSION["shoppingCart"][$_SESSION["addPr"]])){
-            $_SESSION["shoppingCart"][$_POST["addPr"]] += $_POST["howManyItems"];
+        if(isset($_SESSION["shoppingCart"][$_POST["addPr"]])){
+            $_SESSION["shoppingCart"][$_POST["addPr"]] += $_POST["countPr"];
         } else {
-            $_SESSION["shoppingCart"][$_POST["addPr"]] = $_POST["howManyItems"];
+            $_SESSION["shoppingCart"][$_POST["addPr"]] = $_POST["countPr"];
         }
     }
+    if(isset($_POST["Name"]))
     if(isset($_POST["deletePr"])){ 
         $sqlDelete = $connection->prepare("DELETE from PRODUCTS where Pr_ID=?");
         if(!$sqlDelete){
@@ -20,7 +19,6 @@
     }
     include_once "navBar.php"; 
     if(!$_SESSION['isUserLoggedIn']) {
-        // header("Location: /");
         die("Unauthorised, you are not an user");
     } else {?>
         <h1>Current amount of products in the database</h1>
@@ -55,7 +53,7 @@
                                     <td>
                                     <form method="post">
                                         <input type="hidden" value="<?= $row["Pr_ID"]?>" name="addPr">
-                                        <input type="number" value=0 name="howManyItems">
+                                        <input type="number" value=0 name="countPr">
                                         <input type="submit" value="Add">
                                     </form>
                                 </td>
@@ -64,7 +62,7 @@
                                 <td>
                                     <form method="post">
                                         <input type="hidden" value="<?= $row["Pr_ID"]?>" name="addPr">
-                                        <input type="number" value=0 name="howManyItems">
+                                        <input type="number" value=0 name="countPr">
                                         <input type="submit" value="Buy">
                                     </form>
                                 </td>

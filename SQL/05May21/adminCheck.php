@@ -1,6 +1,6 @@
 <?php
-    if(!isset($_SESSION["userRole"]) || $_SESSION["userRole"] != "admin"){
-        header("location: homeüage.php"); 
+    if(!isset($_SESSION["isUserLoggedIn"]) || $_SESSION["role"] != "admin"){
+        header("location: login.php"); 
         die("Access denied");
     }
 ?>
